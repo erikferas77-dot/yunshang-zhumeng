@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 // ═══════════════════════════════════════════════════════════
@@ -234,7 +235,7 @@ const STATS = [
 
 const NAV_LINKS = [
   { label: "产品能力", target: "features" },
-  { label: "接入平台", target: "models" },
+  { label: "接入大模型", href: "/playground" },
   { label: "定价方案", target: "pricing" },
   { label: "文档中心", target: "docs" },
 ];
@@ -286,18 +287,18 @@ const BRAND_PILLARS = [
 ];
 
 const MODELS = [
-  { name: "GPT-4o", provider: "OpenAI", desc: "最强通用大模型，逻辑推理之王", color: "#10a37f" },
-  { name: "Claude 3.5", provider: "Anthropic", desc: "超长上下文，深度理解专家", color: "#d97757" },
-  { name: "Gemini 2.0", provider: "Google", desc: "多模态原生，搜索增强推理", color: "#4285f4" },
-  { name: "文心一言", provider: "百度", desc: "中文语义理解，知识增强", color: "#2932e1" },
-  { name: "通义千问", provider: "阿里", desc: "企业级AI引擎，全模态覆盖", color: "#ff6a00" },
-  { name: "豆包", provider: "字节", desc: "年轻活力，创作与对话专家", color: "#3c8cff" },
-  { name: "Kimi", provider: "月之暗面", desc: "长文本处理之王，200万字", color: "#6366f1" },
-  { name: "ChatGLM", provider: "智谱AI", desc: "开源双子模型，国产先锋", color: "#1a5cff" },
-  { name: "Mistral", provider: "Mistral AI", desc: "欧洲开源先锋，高效推理", color: "#ff6b35" },
-  { name: "Llama 3", provider: "Meta", desc: "开源生态基石，自由定制", color: "#0668e1" },
-  { name: "DeepSeek", provider: "DeepSeek", desc: "国产推理黑马，代码专家", color: "#4f46e5" },
-  { name: "Grok", provider: "xAI", desc: "实时信息，叛逆思维", color: "#ef4444" },
+  { name: "GPT-4o", provider: "OpenAI", desc: "最强通用大模型，逻辑推理之王", color: "#10a37f", modelId: "gpt-4o" },
+  { name: "Claude 3.5", provider: "Anthropic", desc: "超长上下文，深度理解专家", color: "#d97757", modelId: "claude-3-5-sonnet-20241022" },
+  { name: "Gemini 2.0", provider: "Google", desc: "多模态原生，搜索增强推理", color: "#4285f4", modelId: "gemini-2.0-flash" },
+  { name: "文心一言", provider: "百度", desc: "中文语义理解，知识增强", color: "#2932e1", modelId: "ernie-4.0" },
+  { name: "通义千问", provider: "阿里", desc: "企业级AI引擎，全模态覆盖", color: "#ff6a00", modelId: "qwen-max" },
+  { name: "豆包", provider: "字节", desc: "年轻活力，创作与对话专家", color: "#3c8cff", modelId: "doubao-pro" },
+  { name: "Kimi", provider: "月之暗面", desc: "长文本处理之王，200万字", color: "#6366f1", modelId: "moonshot-v1-128k" },
+  { name: "ChatGLM", provider: "智谱AI", desc: "开源双子模型，国产先锋", color: "#1a5cff", modelId: "glm-4" },
+  { name: "Mistral", provider: "Mistral AI", desc: "欧洲开源先锋，高效推理", color: "#ff6b35", modelId: "mistral-large" },
+  { name: "Llama 3", provider: "Meta", desc: "开源生态基石，自由定制", color: "#0668e1", modelId: "llama-3-70b" },
+  { name: "DeepSeek", provider: "DeepSeek", desc: "国产推理黑马，代码专家", color: "#4f46e5", modelId: "deepseek-chat" },
+  { name: "Grok", provider: "xAI", desc: "实时信息，叛逆思维", color: "#ef4444", modelId: "grok-beta" },
 ];
 
 const NODES = [
@@ -430,16 +431,22 @@ export default function Home() {
             <span className="font-bold text-sm tracking-[0.15em] uppercase text-cyan-400">云上逐梦</span>
           </button>
           <div className="hidden md:flex items-center gap-8 text-xs tracking-wider uppercase text-zinc-500">
-            {NAV_LINKS.map((item) => (
-              <button
-                key={item.label}
-                type="button"
-                onClick={() => scrollToSection(item.target)}
-                className="hover:text-cyan-400 transition-colors cursor-pointer"
-              >
-                {item.label}
-              </button>
-            ))}
+            {NAV_LINKS.map((item) =>
+              item.href ? (
+                <Link key={item.label} href={item.href} className="hover:text-cyan-400 transition-colors">
+                  {item.label}
+                </Link>
+              ) : (
+                <button
+                  key={item.label}
+                  type="button"
+                  onClick={() => scrollToSection(item.target!)}
+                  className="hover:text-cyan-400 transition-colors cursor-pointer"
+                >
+                  {item.label}
+                </button>
+              )
+            )}
           </div>
           <div className="flex items-center gap-4 text-xs">
             <button
@@ -492,13 +499,19 @@ export default function Home() {
 
           {/* CTA */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20">
+            <Link
+              href="/playground"
+              className="group relative px-8 py-4 rounded-xl text-sm font-bold tracking-wider uppercase overflow-hidden border border-cyan-500/40 bg-cyan-500/10 text-cyan-400 hover:text-black transition-colors duration-300"
+            >
+              <span className="relative z-10">接入大模型 →</span>
+              <span className="absolute inset-0 bg-cyan-400 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
+            </Link>
             <button
               type="button"
               onClick={() => scrollToSection("pricing")}
-              className="group relative px-8 py-4 rounded-xl text-sm font-bold tracking-wider uppercase overflow-hidden border border-cyan-500/40 bg-cyan-500/10 text-cyan-400 hover:text-black transition-colors duration-300"
+              className="px-8 py-4 rounded-xl text-sm tracking-wider uppercase border border-white/10 text-zinc-400 hover:border-cyan-500/30 hover:text-cyan-400 transition-all"
             >
-              <span className="relative z-10">免费开始使用 →</span>
-              <span className="absolute inset-0 bg-cyan-400 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
+              免费开始使用
             </button>
             <button
               type="button"
@@ -578,9 +591,10 @@ export default function Home() {
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {MODELS.map((m) => (
-            <div
+            <Link
               key={m.name}
-              className="group relative p-5 rounded-2xl border border-white/[0.04] bg-white/[0.02] hover:border-cyan-500/20 hover:bg-white/[0.03] transition-all duration-300 cursor-pointer"
+              href={`/playground?model=${m.modelId}`}
+              className="group relative p-5 rounded-2xl border border-white/[0.04] bg-white/[0.02] hover:border-cyan-500/20 hover:bg-white/[0.03] transition-all duration-300 cursor-pointer block"
             >
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-9 h-9 rounded-xl flex items-center justify-center text-xs font-bold" style={{ backgroundColor: `${m.color}15`, color: m.color }}>
@@ -593,14 +607,17 @@ export default function Home() {
               </div>
               <p className="text-zinc-600 text-xs leading-relaxed">{m.desc}</p>
               <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style={{ boxShadow: `inset 0 0 20px ${m.color}10` }} />
-            </div>
+            </Link>
           ))}
         </div>
 
         <div className="text-center mt-8">
-          <p className="text-zinc-600 text-xs">
+          <p className="text-zinc-600 text-xs mb-4">
             还有更多模型正在接入中… <span className="text-cyan-400">Groq · Cohere · Azure · AWS Bedrock</span>
           </p>
+          <Link href="/playground" className="inline-flex px-6 py-2.5 rounded-lg text-xs tracking-wider uppercase border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 transition-all">
+            打开接入台，在线试模型 →
+          </Link>
         </div>
       </section>
 
@@ -892,10 +909,10 @@ export default function Home() {
               </button>
               <button
                 type="button"
-                onClick={() => { setShowDemo(false); scrollToSection("pricing"); }}
+                onClick={() => { setShowDemo(false); window.location.href = "/playground"; }}
                 className="flex-1 py-3 rounded-lg text-xs font-medium tracking-wider uppercase bg-cyan-500 text-black hover:bg-cyan-400 transition-all"
               >
-                免费开始使用
+                接入大模型
               </button>
             </div>
           </div>

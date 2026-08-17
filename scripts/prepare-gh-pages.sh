@@ -23,5 +23,15 @@ fi
 printf 'yszmai.com\n' > "$OUT/CNAME"
 touch "$OUT/.nojekyll"
 
+# /playground（无尾斜杠）→ /playground/
+cat > "$OUT/playground" <<'EOF'
+<!DOCTYPE html><html><head>
+<meta charset="utf-8">
+<meta http-equiv="refresh" content="0;url=/playground/">
+<link rel="canonical" href="/playground/">
+<script>location.replace("/playground/")</script>
+</head><body></body></html>
+EOF
+
 echo "静态站已打包到 $OUT"
 echo "  - /playground/ -> playground/index.html"

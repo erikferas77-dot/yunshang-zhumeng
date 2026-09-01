@@ -12,15 +12,13 @@ export type ChatResult = {
 };
 
 const DEMO_REPLIES: Record<string, string> = {
-  "gpt-4o": "你好，我是 GPT-4o。通过云上逐梦统一接口，你可以用同一套代码调用我，无需单独对接 OpenAI。",
-  "claude-3-5-sonnet-20241022": "你好，我是 Claude 3.5。云上逐梦的路由层会在供应商限流时自动 failover，你的业务不用感知。",
-  "deepseek-chat": "你好，我是 DeepSeek。写代码、做推理都很顺手——在云上逐梦里改一行 model 参数就能切到我。",
+  "gpt-5.6-sol": "你好，我是 GPT-5.6 Sol。云上逐梦已通过服务器端网关接入 OpenAI，网页不会接触 OpenAI 上游密钥。",
 };
 
 function demoReply(model: string, prompt: string): string {
   const base = DEMO_REPLIES[model] ?? `你好，我是 ${model}。这是云上逐梦演示模式——填入 API Key 后即可发起真实请求。`;
   if (prompt.includes("路由") || prompt.includes("接入")) {
-    return `${base}\n\n你问的是接入问题：把 Base URL 设为 https://api.yszmai.com/v1，Header 带上 Authorization: Bearer <你的Key>，model 字段换成目标模型 ID 即可。`;
+    return `${base}\n\n你问的是接入问题：把 Base URL 设为 https://api.yszmai.com/v1，Header 带上 Authorization: Bearer <团队Key>，model 使用 gpt-5.6-sol 即可。`;
   }
   return `${base}\n\n（演示回复）你刚才说：「${prompt.slice(0, 80)}${prompt.length > 80 ? "…" : ""}」`;
 }

@@ -15,7 +15,7 @@ export default function PlaygroundPage() {
   const [messages, setMessages] = useState<UiMessage[]>([
     {
       role: "assistant",
-      content: "欢迎使用云上逐梦接入台。选择模型、输入问题，即可测试统一 API。未填 Key 时走演示模式；填入 Key 后发起真实请求。",
+      content: "欢迎使用云上逐梦团队接入台。当前固定使用 GPT-5.6 Sol；未填团队 Key 时为演示模式，填入后发起真实请求。",
     },
   ]);
   const [loading, setLoading] = useState(false);
@@ -26,15 +26,20 @@ export default function PlaygroundPage() {
 
   useEffect(() => {
     const savedBase = localStorage.getItem(STORAGE_KEYS.baseUrl) ?? DEFAULT_BASE_URL;
-    const savedKey = localStorage.getItem(STORAGE_KEYS.apiKey) ?? "";
+    const savedKey = sessionStorage.getItem(STORAGE_KEYS.apiKey) ?? "";
     const params = new URLSearchParams(window.location.search);
     const queryModel = params.get("model");
     const savedModel = localStorage.getItem(STORAGE_KEYS.model) ?? MODEL_OPTIONS[0].id;
     const validQuery = MODEL_OPTIONS.some((m) => m.id === queryModel);
+    const validSaved = MODEL_OPTIONS.some((m) => m.id === savedModel);
 
-    setBaseUrl(savedBase);
-    setApiKey(savedKey);
-    setModel(validQuery && queryModel ? queryModel : savedModel);
+    const frame = window.requestAnimationFrame(() => {
+      setBaseUrl(savedBase);
+      setApiKey(savedKey);
+      setModel(validQuery && queryModel ? queryModel : validSaved ? savedModel : MODEL_OPTIONS[0].id);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   useEffect(() => {
@@ -42,7 +47,7 @@ export default function PlaygroundPage() {
   }, [baseUrl]);
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEYS.apiKey, apiKey);
+    sessionStorage.setItem(STORAGE_KEYS.apiKey, apiKey);
   }, [apiKey]);
 
   useEffect(() => {
@@ -111,7 +116,7 @@ export default function PlaygroundPage() {
             <div className="w-8 h-8 rounded-lg border border-cyan-500/40 bg-cyan-500/10 flex items-center justify-center text-xs">云</div>
             <span className="font-bold text-sm tracking-[0.15em] uppercase">云上逐梦</span>
           </Link>
-          <div className="text-xs text-zinc-500 tracking-wider uppercase hidden sm:block">接入大模型 · Playground</div>
+          <div className="text-xs text-zinc-500 tracking-wider uppercase hidden sm:block">GPT-5.6 Sol · Playground</div>
           <Link href="/#pricing" className="px-4 py-2 rounded-lg text-xs border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 transition-all">
             获取 API Key →
           </Link>
@@ -121,9 +126,9 @@ export default function PlaygroundPage() {
       <main className="relative z-10 max-w-6xl mx-auto px-6 py-8">
         <div className="mb-8">
           <div className="text-[10px] text-cyan-400 tracking-[0.3em] uppercase mb-2 font-mono">model gateway</div>
-          <h1 className="text-3xl md:text-4xl font-bold mb-3">接入大模型</h1>
+          <h1 className="text-3xl md:text-4xl font-bold mb-3">接入 GPT-5.6 Sol</h1>
           <p className="text-zinc-500 text-sm max-w-2xl leading-relaxed">
-            OpenAI 兼容接口，一套 Key 调遍全球模型。下方直接对话测试；配置保存于本机浏览器，不会上传。
+            OpenAI 兼容接口，供你的团队统一调用 Sol。团队 Key 只在当前浏览器会话保存，请求时仅发送至 api.yszmai.com。
           </p>
         </div>
 
@@ -146,7 +151,9 @@ export default function PlaygroundPage() {
                   value={apiKey}
                   onChange={(e) => setApiKey(e.target.value)}
                   className="w-full px-3 py-2 pr-16 rounded-lg bg-black/50 border border-white/[0.08] text-xs text-zinc-300 focus:border-cyan-500/40 focus:outline-none"
-                  placeholder="sk-..."
+                  placeholder="sk-yszmai-..."
+                  autoComplete="off"
+                  spellCheck={false}
                 />
                 <button
                   type="button"
@@ -159,7 +166,7 @@ export default function PlaygroundPage() {
               {demoMode && (
                 <p className="text-[10px] text-amber-400/80 mb-4 leading-relaxed">未填 Key，当前为演示模式（模拟回复）。填入 Key 后自动切换真实请求。</p>
               )}
-              <label className="block text-[10px] text-zinc-500 uppercase tracking-wider mb-1.5">选择模型</label>
+              <label className="block text-[10px] text-zinc-500 uppercase tracking-wider mb-1.5">模型</label>
               <select
                 value={model}
                 onChange={(e) => setModel(e.target.value)}
@@ -190,9 +197,9 @@ export default function PlaygroundPage() {
             <div className="p-5 rounded-2xl border border-cyan-500/10 bg-cyan-500/[0.03]">
               <h2 className="text-sm font-semibold text-cyan-400 mb-3">三步接入</h2>
               <ol className="space-y-2 text-xs text-zinc-500">
-                <li><span className="text-cyan-400">1.</span> 注册获取 API Key</li>
+                <li><span className="text-cyan-400">1.</span> 向管理员获取团队 API Key</li>
                 <li><span className="text-cyan-400">2.</span> Base URL 填 <code className="text-zinc-400">api.yszmai.com/v1</code></li>
-                <li><span className="text-cyan-400">3.</span> 改 model 参数即可切换模型</li>
+                <li><span className="text-cyan-400">3.</span> model 使用 <code className="text-zinc-400">gpt-5.6-sol</code></li>
               </ol>
             </div>
           </aside>

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 // ═══════════════════════════════════════════════════════════
@@ -287,18 +288,7 @@ const BRAND_PILLARS = [
 ];
 
 const MODELS = [
-  { name: "GPT-4o", provider: "OpenAI", desc: "最强通用大模型，逻辑推理之王", color: "#10a37f", modelId: "gpt-4o" },
-  { name: "Claude 3.5", provider: "Anthropic", desc: "超长上下文，深度理解专家", color: "#d97757", modelId: "claude-3-5-sonnet-20241022" },
-  { name: "Gemini 2.0", provider: "Google", desc: "多模态原生，搜索增强推理", color: "#4285f4", modelId: "gemini-2.0-flash" },
-  { name: "文心一言", provider: "百度", desc: "中文语义理解，知识增强", color: "#2932e1", modelId: "ernie-4.0" },
-  { name: "通义千问", provider: "阿里", desc: "企业级AI引擎，全模态覆盖", color: "#ff6a00", modelId: "qwen-max" },
-  { name: "豆包", provider: "字节", desc: "年轻活力，创作与对话专家", color: "#3c8cff", modelId: "doubao-pro" },
-  { name: "Kimi", provider: "月之暗面", desc: "长文本处理之王，200万字", color: "#6366f1", modelId: "moonshot-v1-128k" },
-  { name: "ChatGLM", provider: "智谱AI", desc: "开源双子模型，国产先锋", color: "#1a5cff", modelId: "glm-4" },
-  { name: "Mistral", provider: "Mistral AI", desc: "欧洲开源先锋，高效推理", color: "#ff6b35", modelId: "mistral-large" },
-  { name: "Llama 3", provider: "Meta", desc: "开源生态基石，自由定制", color: "#0668e1", modelId: "llama-3-70b" },
-  { name: "DeepSeek", provider: "DeepSeek", desc: "国产推理黑马，代码专家", color: "#4f46e5", modelId: "deepseek-chat" },
-  { name: "Grok", provider: "xAI", desc: "实时信息，叛逆思维", color: "#ef4444", modelId: "grok-beta" },
+  { name: "GPT-5.6 Sol", provider: "OpenAI", desc: "复杂专业工作、推理与代码任务", color: "#10a37f", modelId: "gpt-5.6-sol" },
 ];
 
 const NODES = [
@@ -376,6 +366,7 @@ const FAQS = [
 //  MAIN PAGE
 // ═══════════════════════════════════════════════════════════
 export default function Home() {
+  const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [typingText, setTypingText] = useState("");
@@ -473,7 +464,7 @@ export default function Home() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-10 rounded-full border border-cyan-500/20 bg-cyan-500/5">
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-            <span className="text-cyan-400 text-xs tracking-[0.2em] uppercase font-mono">已接入 12+ 全球顶尖大模型 · 服务 50 万+ 开发者</span>
+            <span className="text-cyan-400 text-xs tracking-[0.2em] uppercase font-mono">GPT-5.6 Sol 团队接口已就绪</span>
           </div>
 
           {/* Typing Title */}
@@ -488,10 +479,10 @@ export default function Home() {
           </h2>
 
           <p className="text-sm md:text-base text-zinc-400 leading-relaxed max-w-2xl mx-auto mb-4 font-mono">
-            一站式接入 GPT-4o、Claude 3.5、Gemini、文心、通义等全球顶尖 AI
+            一站式接入 OpenAI GPT-5.6 Sol
           </p>
           <p className="text-sm text-zinc-500 leading-relaxed max-w-2xl mx-auto mb-4">
-            模型会换代，接口不该跟着碎。云上逐梦把全球算力收进同一扇门——一套 Key，任意模型，就近节点响应。
+            OpenAI 密钥留在服务器端，团队成员使用统一网关 Key 调用，不必各自购买 ChatGPT 会员。
           </p>
           <p className="text-xs text-zinc-600 tracking-[0.3em] uppercase mb-12 font-mono">
             智能路由 · 统一接口 · 弹性伸缩 · 企业级安全 · 全球节点
@@ -583,9 +574,9 @@ export default function Home() {
       <section id="models" className="relative z-10 max-w-6xl mx-auto px-6 py-24 border-t border-white/[0.04] scroll-mt-20">
         <div className="text-center mb-12">
           <div className="text-[10px] text-cyan-400 tracking-[0.3em] uppercase mb-3 font-mono">unified gateway</div>
-          <h2 className="text-2xl md:text-4xl font-bold tracking-tight mb-4">一个接口，调用全宇宙模型</h2>
+          <h2 className="text-2xl md:text-4xl font-bold tracking-tight mb-4">一个接口，团队统一调用 Sol</h2>
           <p className="text-zinc-500 text-sm max-w-xl mx-auto">
-            无需对接多个平台，一次接入即可调用 GPT-4o、Claude、Gemini、DeepSeek 等 12+ 顶尖大模型，智能路由自动选择最优路径
+            兼容 OpenAI Chat Completions，业务只需使用 api.yszmai.com、团队 Key 和 gpt-5.6-sol
           </p>
         </div>
 
@@ -613,7 +604,7 @@ export default function Home() {
 
         <div className="text-center mt-8">
           <p className="text-zinc-600 text-xs mb-4">
-            还有更多模型正在接入中… <span className="text-cyan-400">Groq · Cohere · Azure · AWS Bedrock</span>
+            当前仅开放 <span className="text-cyan-400">GPT-5.6 Sol</span>，费用统一记入你的 OpenAI API 账户
           </p>
           <Link href="/playground" className="inline-flex px-6 py-2.5 rounded-lg text-xs tracking-wider uppercase border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 transition-all">
             打开接入台，在线试模型 →
@@ -727,13 +718,13 @@ export default function Home() {
               <pre className="text-zinc-400 leading-relaxed">
                 <span className="text-fuchsia-400">import</span> <span className="text-cyan-400">yunshang</span>{"\n"}
                 {"\n"}
-                client = yunshang.<span className="text-cyan-400">Client</span>(<span className="text-emerald-400">"your-api-key"</span>){"\n"}
+                client = yunshang.<span className="text-cyan-400">Client</span>(<span className="text-emerald-400">&quot;your-api-key&quot;</span>){"\n"}
                 response = client.chat.<span className="text-cyan-400">create</span>({"\n"}
-                {"    "}model=<span className="text-emerald-400">"gpt-4o"</span>,{"\n"}
-                {"    "}messages=[{`{`}"role": <span className="text-emerald-400">"user"</span>, "content": <span className="text-emerald-400">"Hello"</span>{`}`}]{"\n"}
+                {"    "}model=<span className="text-emerald-400">&quot;gpt-5.6-sol&quot;</span>,{"\n"}
+                {"    "}messages=[{`{`}&quot;role&quot;: <span className="text-emerald-400">&quot;user&quot;</span>, &quot;content&quot;: <span className="text-emerald-400">&quot;Hello&quot;</span>{`}`}]{"\n"}
                 ){"\n"}
                 {"\n"}
-                <span className="text-zinc-600"># 一行代码切换任意模型</span>{"\n"}
+                <span className="text-zinc-600"># 请求经云上逐梦网关转发到 OpenAI</span>{"\n"}
                 <span className="text-cyan-400">print</span>(response.choices[0].message.content)
               </pre>
             </div>
@@ -891,13 +882,12 @@ export default function Home() {
             <div className="text-[10px] text-cyan-400 tracking-[0.3em] uppercase mb-3 font-mono">live demo</div>
             <h3 className="text-xl font-bold mb-2">30 秒看懂云上逐梦</h3>
             <p className="text-zinc-500 text-sm mb-6 leading-relaxed">
-              同一套 API，切换 model 即可调用不同大模型。智能路由在后台自动选最优节点，你只管写业务逻辑。
+              同一套 API 和团队 Key 调用 GPT-5.6 Sol。OpenAI 上游密钥只保存在服务器，不会下发到成员浏览器。
             </p>
             <div className="bg-black/50 rounded-xl border border-white/[0.06] p-4 font-mono text-xs text-zinc-400 mb-4 leading-relaxed">
-              <div className="text-zinc-600 mb-2"># 一行切换模型</div>
-              <div><span className="text-fuchsia-400">for</span> model <span className="text-cyan-400">in</span> [<span className="text-emerald-400">&quot;gpt-4o&quot;</span>, <span className="text-emerald-400">&quot;claude-3.5&quot;</span>, <span className="text-emerald-400">&quot;deepseek&quot;</span>]:</div>
-              <div className="pl-4">resp = client.chat.create(model=model, messages=[...])</div>
-              <div className="text-cyan-400 mt-2">→ 路由命中: 新加坡节点 · 延迟 28ms</div>
+              <div className="text-zinc-600 mb-2"># 固定使用 Sol</div>
+              <div>resp = client.chat.create(model=<span className="text-emerald-400">&quot;gpt-5.6-sol&quot;</span>, messages=[...])</div>
+              <div className="text-cyan-400 mt-2">→ api.yszmai.com → OpenAI</div>
             </div>
             <div className="flex flex-col sm:flex-row gap-3">
               <button
@@ -909,7 +899,7 @@ export default function Home() {
               </button>
               <button
                 type="button"
-                onClick={() => { setShowDemo(false); window.location.href = "/playground"; }}
+                onClick={() => { setShowDemo(false); router.push("/playground"); }}
                 className="flex-1 py-3 rounded-lg text-xs font-medium tracking-wider uppercase bg-cyan-500 text-black hover:bg-cyan-400 transition-all"
               >
                 接入大模型

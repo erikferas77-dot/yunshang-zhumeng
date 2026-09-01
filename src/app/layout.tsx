@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "云上逐梦 - 全球大模型统一接入平台",
-  description: "一站式接入 GPT-4o、Claude 3.5、Gemini、文心、通义等全球顶尖 AI 大模型。智能路由、统一接口、企业级安全、全球节点低延迟访问。",
+  title: "云上逐梦 - GPT-5.6 Sol 团队接入",
+  description: "通过 OpenAI 兼容接口统一接入 GPT-5.6 Sol，供团队安全调用。",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

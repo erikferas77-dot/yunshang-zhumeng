@@ -15,7 +15,7 @@ export default function PlaygroundPage() {
   const [messages, setMessages] = useState<UiMessage[]>([
     {
       role: "assistant",
-      content: "欢迎使用云上逐梦团队接入台。当前固定使用 GPT-5.6 Sol；未填团队 Key 时为演示模式，填入后发起真实请求。",
+      content: "欢迎使用云上逐梦团队接入台。当前固定使用 GPT-5.6 Sol；未填团队密钥时为演示模式，填入后发起真实请求。",
     },
   ]);
   const [loading, setLoading] = useState(false);
@@ -114,21 +114,21 @@ export default function PlaygroundPage() {
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 text-cyan-400 hover:text-cyan-300 transition-colors">
             <div className="w-8 h-8 rounded-lg border border-cyan-500/40 bg-cyan-500/10 flex items-center justify-center text-xs">云</div>
-            <span className="font-bold text-sm tracking-[0.15em] uppercase">云上逐梦</span>
+            <span className="font-bold text-sm tracking-[0.2em]">云上逐梦</span>
           </Link>
-          <div className="text-xs text-zinc-500 tracking-wider uppercase hidden sm:block">GPT-5.6 Sol · Playground</div>
+          <div className="text-xs text-zinc-500 tracking-wider hidden sm:block">GPT-5.6 Sol · 接入台</div>
           <Link href="/#pricing" className="px-4 py-2 rounded-lg text-xs border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 transition-all">
-            获取 API Key →
+            获取接口密钥 →
           </Link>
         </div>
       </header>
 
       <main className="relative z-10 max-w-6xl mx-auto px-6 py-8">
         <div className="mb-8">
-          <div className="text-[10px] text-cyan-400 tracking-[0.3em] uppercase mb-2 font-mono">model gateway</div>
+          <div className="text-[10px] text-cyan-400 tracking-[0.2em] mb-2 font-mono">模型网关</div>
           <h1 className="text-3xl md:text-4xl font-bold mb-3">接入 GPT-5.6 Sol</h1>
           <p className="text-zinc-500 text-sm max-w-2xl leading-relaxed">
-            OpenAI 兼容接口，供你的团队统一调用 Sol。团队 Key 只在当前浏览器会话保存，请求时仅发送至 api.yszmai.com。
+            OpenAI 兼容接口，供你的团队统一调用 Sol。团队密钥只在当前浏览器会话保存，请求时仅发送至 api.yszmai.com。
           </p>
         </div>
 
@@ -137,14 +137,14 @@ export default function PlaygroundPage() {
           <aside className="space-y-4">
             <div className="p-5 rounded-2xl border border-white/[0.06] bg-white/[0.02]">
               <h2 className="text-sm font-semibold text-zinc-200 mb-4">连接配置</h2>
-              <label className="block text-[10px] text-zinc-500 uppercase tracking-wider mb-1.5">Base URL</label>
+              <label className="block text-[10px] text-zinc-500 tracking-wider mb-1.5">接口地址</label>
               <input
                 value={baseUrl}
                 onChange={(e) => setBaseUrl(e.target.value)}
                 className="w-full mb-4 px-3 py-2 rounded-lg bg-black/50 border border-white/[0.08] text-xs text-zinc-300 focus:border-cyan-500/40 focus:outline-none"
                 placeholder="https://api.yszmai.com/v1"
               />
-              <label className="block text-[10px] text-zinc-500 uppercase tracking-wider mb-1.5">API Key</label>
+              <label className="block text-[10px] text-zinc-500 tracking-wider mb-1.5">接口密钥</label>
               <div className="relative mb-4">
                 <input
                   type={showKey ? "text" : "password"}
@@ -164,7 +164,7 @@ export default function PlaygroundPage() {
                 </button>
               </div>
               {demoMode && (
-                <p className="text-[10px] text-amber-400/80 mb-4 leading-relaxed">未填 Key，当前为演示模式（模拟回复）。填入 Key 后自动切换真实请求。</p>
+                <p className="text-[10px] text-amber-400/80 mb-4 leading-relaxed">未填密钥，当前为演示模式（模拟回复）。填入密钥后自动切换真实请求。</p>
               )}
               <label className="block text-[10px] text-zinc-500 uppercase tracking-wider mb-1.5">模型</label>
               <select
@@ -184,7 +184,7 @@ export default function PlaygroundPage() {
 
             <div className="p-5 rounded-2xl border border-white/[0.06] bg-white/[0.02]">
               <div className="flex items-center justify-between mb-3">
-                <h2 className="text-sm font-semibold text-zinc-200">cURL 示例</h2>
+                <h2 className="text-sm font-semibold text-zinc-200">命令行示例</h2>
                 <button type="button" onClick={copyCurl} className="text-[10px] text-cyan-400 hover:text-cyan-300">
                   {copied ? "已复制" : "复制"}
                 </button>
@@ -197,9 +197,9 @@ export default function PlaygroundPage() {
             <div className="p-5 rounded-2xl border border-cyan-500/10 bg-cyan-500/[0.03]">
               <h2 className="text-sm font-semibold text-cyan-400 mb-3">三步接入</h2>
               <ol className="space-y-2 text-xs text-zinc-500">
-                <li><span className="text-cyan-400">1.</span> 向管理员获取团队 API Key</li>
-                <li><span className="text-cyan-400">2.</span> Base URL 填 <code className="text-zinc-400">api.yszmai.com/v1</code></li>
-                <li><span className="text-cyan-400">3.</span> model 使用 <code className="text-zinc-400">gpt-5.6-sol</code></li>
+                <li><span className="text-cyan-400">1.</span> 向管理员获取团队接口密钥</li>
+                <li><span className="text-cyan-400">2.</span> 接口地址填 <code className="text-zinc-400">api.yszmai.com/v1</code></li>
+                <li><span className="text-cyan-400">3.</span> 模型使用 <code className="text-zinc-400">gpt-5.6-sol</code></li>
               </ol>
             </div>
           </aside>
@@ -207,7 +207,7 @@ export default function PlaygroundPage() {
           {/* Chat */}
           <section className="flex flex-col min-h-[560px] rounded-2xl border border-white/[0.06] bg-white/[0.02] overflow-hidden">
             <div className="px-5 py-3 border-b border-white/[0.06] flex items-center justify-between">
-              <span className="text-xs text-zinc-500 font-mono">chat.completions</span>
+              <span className="text-xs text-zinc-500 font-mono">对话补全</span>
               <span className={`text-[10px] px-2 py-0.5 rounded-full border ${demoMode ? "border-amber-500/30 text-amber-400" : "border-emerald-500/30 text-emerald-400"}`}>
                 {demoMode ? "演示模式" : "真实请求"}
               </span>
@@ -224,7 +224,7 @@ export default function PlaygroundPage() {
                     <div className="whitespace-pre-wrap">{msg.content}</div>
                     {msg.meta && (
                       <div className="mt-2 text-[10px] text-zinc-600 font-mono">
-                        {msg.meta.demo ? "demo" : msg.meta.model} · {msg.meta.latencyMs}ms
+                        {msg.meta.demo ? "演示" : msg.meta.model} · {msg.meta.latencyMs}毫秒
                       </div>
                     )}
                   </div>

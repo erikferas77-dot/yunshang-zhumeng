@@ -16,9 +16,9 @@ const DEMO_REPLIES: Record<string, string> = {
 };
 
 function demoReply(model: string, prompt: string): string {
-  const base = DEMO_REPLIES[model] ?? `你好，我是 ${model}。这是云上逐梦演示模式——填入 API Key 后即可发起真实请求。`;
+  const base = DEMO_REPLIES[model] ?? `你好，我是 ${model}。这是云上逐梦演示模式——填入接口密钥后即可发起真实请求。`;
   if (prompt.includes("路由") || prompt.includes("接入")) {
-    return `${base}\n\n你问的是接入问题：把 Base URL 设为 https://api.yszmai.com/v1，Header 带上 Authorization: Bearer <团队Key>，model 使用 gpt-5.6-sol 即可。`;
+    return `${base}\n\n你问的是接入问题：把接口地址设为 https://api.yszmai.com/v1，请求头带上 Authorization: Bearer <团队密钥>，模型使用 gpt-5.6-sol 即可。`;
   }
   return `${base}\n\n（演示回复）你刚才说：「${prompt.slice(0, 80)}${prompt.length > 80 ? "…" : ""}」`;
 }
@@ -85,9 +85,9 @@ export function buildCurlSnippet(baseUrl: string, apiKey: string, model: string,
   const url = `${baseUrl.replace(/\/$/, "")}/chat/completions`;
   return `curl ${url} \\
   -H "Content-Type: application/json" \\
-  -H "Authorization: Bearer ${apiKey || "YOUR_API_KEY"}" \\
+  -H "Authorization: Bearer ${apiKey || "你的团队密钥"}" \\
   -d '{
     "model": "${model}",
-    "messages": [{"role": "user", "content": "${prompt.replace(/"/g, '\\"') || "Hello"}"}]
+    "messages": [{"role": "user", "content": "${prompt.replace(/"/g, '\\"') || "你好"}"}]
   }'`;
 }

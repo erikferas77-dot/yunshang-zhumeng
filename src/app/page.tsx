@@ -228,9 +228,9 @@ function GlitchText({ text, className = "" }: { text: string; className?: string
 const STATS = [
   { value: "12", suffix: "+", label: "大模型接入", color: "text-cyan-400" },
   { value: "99.99", suffix: "%", label: "服务可用性", color: "text-emerald-400" },
-  { value: "35", suffix: "ms", label: "平均延迟", color: "text-amber-400" },
+  { value: "35", suffix: "毫秒", label: "平均延迟", color: "text-amber-400" },
   { value: "50", suffix: "万+", label: "开发者信赖", color: "text-rose-400" },
-  { value: "10", suffix: "亿+", label: "日处理 TOKEN", color: "text-violet-400" },
+  { value: "10", suffix: "亿+", label: "日处理令牌", color: "text-violet-400" },
   { value: "8", suffix: "", label: "全球节点", color: "text-blue-400" },
 ];
 
@@ -245,27 +245,27 @@ const CAPABILITIES = [
   {
     icon: "🔀",
     title: "智能路由",
-    desc: "按延迟、成本、可用性自动选路。单家限流或区域抖动时无缝 failover，请求日志可追溯实际命中节点。",
+    desc: "按延迟、成本、可用性自动选路。单家限流或区域抖动时无缝故障转移，请求日志可追溯实际命中节点。",
   },
   {
     icon: "🔌",
     title: "统一接口",
-    desc: "OpenAI 兼容协议，一套 SDK 调遍 GPT、Claude、Gemini、文心、通义。换模型只改 model 参数，业务代码零重写。",
+    desc: "OpenAI 兼容协议，一套开发包调遍 GPT、Claude、Gemini、文心、通义。换模型只改模型参数，业务代码零重写。",
   },
   {
     icon: "📈",
     title: "弹性伸缩",
-    desc: "从探索版日千次到企业级亿级 Token，配额与队列自动扩缩。高峰不排队，低谷不浪费。",
+    desc: "从探索版日千次到企业级亿级令牌，配额与队列自动扩缩。高峰不排队，低谷不浪费。",
   },
   {
     icon: "🛡️",
     title: "企业级安全",
-    desc: "全程 TLS、密钥隔离、访问审计。企业版支持专有链路与数据物理隔离，满足合规审计要求。",
+    desc: "全程传输加密、密钥隔离、访问审计。企业版支持专有链路与数据物理隔离，满足合规审计要求。",
   },
   {
     icon: "🌐",
     title: "全球节点",
-    desc: "北京、上海、新加坡、东京、硅谷、伦敦、法兰克福、悉尼 8 大节点就近调度，全球平均延迟 < 50ms。",
+    desc: "北京、上海、新加坡、东京、硅谷、伦敦、法兰克福、悉尼 8 大节点就近调度，全球平均延迟低于 50 毫秒。",
   },
 ];
 
@@ -305,7 +305,7 @@ const NODES = [
 const SCENES = [
   { title: "智能客服", desc: "7×24h 多语言自动应答，情感识别，智能转人工", icon: "🤖" },
   { title: "内容创作", desc: "文案/脚本/营销一键生成，爆款标题自动优化", icon: "✍️" },
-  { title: "代码辅助", desc: "自动补全、Review、重构，Bug 智能诊断", icon: "💻" },
+  { title: "代码辅助", desc: "自动补全、代码评审、重构，缺陷智能诊断", icon: "💻" },
   { title: "数据分析", desc: "海量数据智能洞察，可视化报告自动生成", icon: "📊" },
   { title: "教育辅导", desc: "个性化学习路径规划，知识点精准拆解", icon: "🎓" },
   { title: "多语言翻译", desc: "实时精准跨语言沟通，专业术语自动适配", icon: "🌍" },
@@ -314,19 +314,19 @@ const SCENES = [
 const LOGOS = ["OpenAI", "Anthropic", "Google", "百度", "阿里", "字节", "Moonshot", "智谱AI", "Mistral", "Meta", "Microsoft", "Amazon"];
 
 const PRICING = [
-  { name: "探索版", price: "¥0", period: "/月", desc: "个人开发者尝鲜，零门槛体验", features: ["1000 次 API 调用/天", "5 个主流模型", "社区支持", "基础文档"], highlight: false },
-  { name: "专业版", price: "¥99", period: "/月", desc: "中小团队首选，无限可能", features: ["无限 API 调用", "全部 12+ 模型接入", "优先响应队列", "7×24 技术支持", "自定义路由策略", "高级分析面板"], highlight: true },
-  { name: "企业版", price: "定制", period: "", desc: "大型企业专属，安全合规", features: ["私有化部署", "SLA 99.99%", "专属客户经理", "合规审计", "数据物理隔离", "定制模型微调"], highlight: false },
+  { name: "探索版", price: "¥0", period: "/月", desc: "个人开发者尝鲜，零门槛体验", features: ["1000 次接口调用/天", "5 个主流模型", "社区支持", "基础文档"], highlight: false },
+  { name: "专业版", price: "¥99", period: "/月", desc: "中小团队首选，无限可能", features: ["无限接口调用", "全部 12+ 模型接入", "优先响应队列", "7×24 技术支持", "自定义路由策略", "高级分析面板"], highlight: true },
+  { name: "企业版", price: "定制", period: "", desc: "大型企业专属，安全合规", features: ["私有化部署", "服务可用性 99.99%", "专属客户经理", "合规审计", "数据物理隔离", "定制模型微调"], highlight: false },
 ];
 
 const FAQS = [
   {
     q: "云上逐梦是什么？和直接调 OpenAI / 通义有什么区别？",
-    a: "云上逐梦是全球大模型的统一接入层，不是某一家模型的代理包装。直接对接各家，意味着多套 Key、多种鉴权、不同限流和账单。我们把 GPT-4o、Claude、Gemini、文心、通义、Kimi、DeepSeek 等收成一个 API：同一套 SDK、同一张控制台、一次接入即可按场景切模型。模型会迭代，你的业务接口不用跟着碎。",
+    a: "云上逐梦是全球大模型的统一接入层，不是某一家模型的代理包装。直接对接各家，意味着多套密钥、多种鉴权、不同限流和账单。我们把 GPT-4o、Claude、Gemini、文心、通义、Kimi、DeepSeek 等收成一套接口：同一套开发包、同一张控制台、一次接入即可按场景切模型。模型会迭代，你的业务接口不用跟着碎。",
   },
   {
     q: "如何接入我的应用？大概要多久？",
-    a: "申请 API Key 后，用官方 SDK 三行代码即可发第一条请求。目前提供 Python、Node.js、Go、Java、Rust。已有 OpenAI 兼容调用的项目，通常只需改 Base URL 和 Key，原有 chat.completions 代码可继续用。文档中心有完整示例；探索版可当场试用，多数团队 5–15 分钟跑通联调。",
+    a: "申请接口密钥后，用官方开发包三行代码即可发第一条请求。目前提供 Python、Node.js、Go、Java、Rust。已有 OpenAI 兼容调用的项目，通常只需改接口地址和密钥，原有对话补全代码可继续用。文档中心有完整示例；探索版可当场试用，多数团队 5–15 分钟跑通联调。",
   },
   {
     q: "现在支持哪些大模型？以后会不会下架？",
@@ -334,27 +334,27 @@ const FAQS = [
   },
   {
     q: "智能路由具体怎么工作？我会被随机切到很贵的模型吗？",
-    a: "路由按你设定的策略选路，不会擅自换成更贵的模型。可选：固定模型、同能力档位内选最低延迟、同能力档位内选最低成本、以及故障自动 failover。限流、超时、区域故障会切到下一跳可用节点，请求日志里能看到实际命中的供应商与节点，便于对账和排障。",
+    a: "路由按你设定的策略选路，不会擅自换成更贵的模型。可选：固定模型、同能力档位内选最低延迟、同能力档位内选最低成本、以及故障自动转移。限流、超时、区域故障会切到下一跳可用节点，请求日志里能看到实际命中的供应商与节点，便于对账和排障。",
   },
   {
     q: "数据安全吗？会拿我的对话去训练吗？",
-    a: "传输全程 TLS。默认不把业务数据用于训练自有模型，也不向第三方模型提供商授权「用你的数据微调」——各家模型方自己的保留策略以对方文档为准，我们在控制台标明。企业版支持专有链路、数据隔离、访问审计；需要物理隔离或私有化部署可走企业方案，并配合合规审计（含 SOC2 等路径）。",
+    a: "传输全程加密。默认不把业务数据用于训练自有模型，也不向第三方模型提供商授权「用你的数据微调」——各家模型方自己的保留策略以对方文档为准，我们在控制台标明。企业版支持专有链路、数据隔离、访问审计；需要物理隔离或私有化部署可走企业方案，并配合合规审计（含 SOC 2 等路径）。",
   },
   {
     q: "全球都能访问吗？在国内和海外延迟差多少？",
-    a: "可以。节点覆盖北京、上海、新加坡、东京、硅谷、伦敦、法兰克福、悉尼。请求按来源就近调度，全球平均延迟目标低于 50ms 量级（视模型和网络而定）。无国家封锁式限制：海外团队调国产模型、国内团队调国际模型，走的是同一套账号与配额，不需要自己搭跨境代理。",
+    a: "可以。节点覆盖北京、上海、新加坡、东京、硅谷、伦敦、法兰克福、悉尼。请求按来源就近调度，全球平均延迟目标低于 50 毫秒量级（视模型和网络而定）。无国家封锁式限制：海外团队调国产模型、国内团队调国际模型，走的是同一套账号与配额，不需要自己搭跨境代理。",
   },
   {
-    q: "探索版（免费）有哪些限制？够不够做 Demo？",
-    a: "探索版每天 1000 次 API 调用、开放 5 个主流模型、社区支持与基础文档。适合个人学习、黑客松和产品原型。不包含优先队列、自定义路由和企业审计。额度用完可次日重置，或随时升到专业版，Key 和调用代码不用改。",
+    q: "探索版（免费）有哪些限制？够不够做演示？",
+    a: "探索版每天 1000 次接口调用、开放 5 个主流模型、社区支持与基础文档。适合个人学习、黑客松和产品原型。不包含优先队列、自定义路由和企业审计。额度用完可次日重置，或随时升到专业版，密钥和调用代码不用改。",
   },
   {
     q: "如何计费？会不会有隐藏费用？",
-    a: "探索版 ¥0；专业版 ¥99/月，含无限次平台调用额度（底层模型按官方价透传或套餐内配额，以控制台标价为准，不含未开通的私有化实施）。没有最低消费、没有沉默账号年费。企业版按节点、隔离级别和 SLA 报价。账单按自然月出具，可导出调用明细对账。",
+    a: "探索版 ¥0；专业版 ¥99/月，含无限次平台调用额度（底层模型按官方价透传或套餐内配额，以控制台标价为准，不含未开通的私有化实施）。没有最低消费、没有沉默账号年费。企业版按节点、隔离级别和服务等级报价。账单按自然月出具，可导出调用明细对账。",
   },
   {
-    q: "出故障了怎么办？有 SLA 吗？",
-    a: "平台状态页展示各模型与节点可用性。专业版含 7×24 工单；企业版可签 SLA 99.99%，含专属客户经理和故障升级通道。单个供应商故障时，已开启 failover 的路由会自动切走。建议生产环境至少配置一个同能力备选模型，避免单模型依赖。",
+    q: "出故障了怎么办？有服务等级协议吗？",
+    a: "平台状态页展示各模型与节点可用性。专业版含 7×24 工单；企业版可签服务可用性 99.99%，含专属客户经理和故障升级通道。单个供应商故障时，已开启故障转移的路由会自动切走。建议生产环境至少配置一个同能力备选模型，避免单模型依赖。",
   },
   {
     q: "品牌名叫「云上逐梦」，你们到底卖什么？",
@@ -419,9 +419,9 @@ export default function Home() {
                 <path d="M2 12l10 5 10-5" />
               </svg>
             </div>
-            <span className="font-bold text-sm tracking-[0.15em] uppercase text-cyan-400">云上逐梦</span>
+            <span className="font-bold text-sm tracking-[0.2em] text-cyan-400">云上逐梦</span>
           </button>
-          <div className="hidden md:flex items-center gap-8 text-xs tracking-wider uppercase text-zinc-500">
+          <div className="hidden md:flex items-center gap-8 text-xs tracking-wider text-zinc-500">
             {NAV_LINKS.map((item) =>
               item.href ? (
                 <Link key={item.label} href={item.href} className="hover:text-cyan-400 transition-colors">
@@ -482,7 +482,7 @@ export default function Home() {
             一站式接入 OpenAI GPT-5.6 Sol
           </p>
           <p className="text-sm text-zinc-500 leading-relaxed max-w-2xl mx-auto mb-4">
-            OpenAI 密钥留在服务器端，团队成员使用统一网关 Key 调用，不必各自购买 ChatGPT 会员。
+            OpenAI 密钥留在服务器端，团队成员使用统一网关密钥调用，不必各自购买 ChatGPT 会员。
           </p>
           <p className="text-xs text-zinc-600 tracking-[0.3em] uppercase mb-12 font-mono">
             智能路由 · 统一接口 · 弹性伸缩 · 企业级安全 · 全球节点
@@ -530,7 +530,7 @@ export default function Home() {
       {/* ═══ CAPABILITIES ═══ */}
       <section id="features" className="relative z-10 max-w-6xl mx-auto px-6 py-24 border-t border-white/[0.04] scroll-mt-20">
         <div className="text-center mb-12">
-          <div className="text-[10px] text-cyan-400 tracking-[0.3em] uppercase mb-3 font-mono">core capabilities</div>
+          <div className="text-[10px] text-cyan-400 tracking-[0.2em] mb-3 font-mono">核心能力</div>
           <h2 className="text-2xl md:text-4xl font-bold tracking-tight mb-4">五大核心能力，一次接入全拥有</h2>
           <p className="text-zinc-500 text-sm max-w-2xl mx-auto leading-relaxed">
             智能路由、统一接口、弹性伸缩、企业级安全、全球节点——不是营销口号，是云上逐梦平台默认开启的基础设施。
@@ -550,7 +550,7 @@ export default function Home() {
       {/* ═══ BRAND ═══ */}
       <section className="relative z-10 max-w-6xl mx-auto px-6 py-24 border-t border-white/[0.04]">
         <div className="text-center mb-14">
-          <div className="text-[10px] text-cyan-400 tracking-[0.3em] uppercase mb-3 font-mono">manifesto</div>
+          <div className="text-[10px] text-cyan-400 tracking-[0.2em] mb-3 font-mono">品牌主张</div>
           <h2 className="text-2xl md:text-4xl font-bold tracking-tight mb-4">为什么是云上逐梦</h2>
           <p className="text-zinc-500 text-sm max-w-2xl mx-auto leading-relaxed">
             我们不训练下一个万亿参数模型，也不做又一个聊天窗口。云上逐梦只做一件事：让全球顶尖 AI 像水电一样，打开就能用。
@@ -573,10 +573,10 @@ export default function Home() {
       {/* ═══ MODEL CARDS ═══ */}
       <section id="models" className="relative z-10 max-w-6xl mx-auto px-6 py-24 border-t border-white/[0.04] scroll-mt-20">
         <div className="text-center mb-12">
-          <div className="text-[10px] text-cyan-400 tracking-[0.3em] uppercase mb-3 font-mono">unified gateway</div>
+          <div className="text-[10px] text-cyan-400 tracking-[0.2em] mb-3 font-mono">统一网关</div>
           <h2 className="text-2xl md:text-4xl font-bold tracking-tight mb-4">一个接口，团队统一调用 Sol</h2>
           <p className="text-zinc-500 text-sm max-w-xl mx-auto">
-            兼容 OpenAI Chat Completions，业务只需使用 api.yszmai.com、团队 Key 和 gpt-5.6-sol
+            兼容 OpenAI 对话补全接口，业务只需使用 api.yszmai.com、团队密钥和 gpt-5.6-sol
           </p>
         </div>
 
@@ -604,7 +604,7 @@ export default function Home() {
 
         <div className="text-center mt-8">
           <p className="text-zinc-600 text-xs mb-4">
-            当前仅开放 <span className="text-cyan-400">GPT-5.6 Sol</span>，费用统一记入你的 OpenAI API 账户
+            当前仅开放 <span className="text-cyan-400">GPT-5.6 Sol</span>，费用统一记入你的 OpenAI 接口账户
           </p>
           <Link href="/playground" className="inline-flex px-6 py-2.5 rounded-lg text-xs tracking-wider uppercase border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 transition-all">
             打开接入台，在线试模型 →
@@ -615,7 +615,7 @@ export default function Home() {
       {/* ═══ GLOBAL NODES ═══ */}
       <section id="nodes" className="relative z-10 max-w-6xl mx-auto px-6 py-24 border-t border-white/[0.04] scroll-mt-20">
         <div className="text-center mb-12">
-          <div className="text-[10px] text-cyan-400 tracking-[0.3em] uppercase mb-3 font-mono">global infrastructure</div>
+          <div className="text-[10px] text-cyan-400 tracking-[0.2em] mb-3 font-mono">全球基础设施</div>
           <h2 className="text-2xl md:text-4xl font-bold tracking-tight mb-4">全球 8 大节点，低延迟无国界</h2>
           <p className="text-zinc-500 text-sm max-w-xl mx-auto">
             覆盖亚太、北美、欧洲、澳洲，任何地方都能享受毫秒级响应。无国家限制，真正的全球化 AI 基础设施。
@@ -659,7 +659,7 @@ export default function Home() {
 
           {/* Center info */}
           <div className="relative z-10 text-center">
-            <div className="text-4xl md:text-5xl font-bold font-mono text-cyan-400 mb-2">&lt; 50ms</div>
+            <div className="text-4xl md:text-5xl font-bold font-mono text-cyan-400 mb-2">&lt; 50毫秒</div>
             <p className="text-zinc-500 text-sm mb-6">全球平均响应延迟</p>
             <div className="flex flex-wrap justify-center gap-3">
               {NODES.map((n) => (
@@ -675,7 +675,7 @@ export default function Home() {
       {/* ═══ SCENES BENTO ═══ */}
       <section className="relative z-10 max-w-6xl mx-auto px-6 py-24 border-t border-white/[0.04]">
         <div className="text-center mb-12">
-          <div className="text-[10px] text-cyan-400 tracking-[0.3em] uppercase mb-3 font-mono">use cases</div>
+          <div className="text-[10px] text-cyan-400 tracking-[0.2em] mb-3 font-mono">应用场景</div>
           <h2 className="text-2xl md:text-4xl font-bold tracking-tight mb-4">全场景 AI 赋能</h2>
           <p className="text-zinc-500 text-sm">一个平台，无限可能</p>
         </div>
@@ -698,9 +698,9 @@ export default function Home() {
       <section id="docs" className="relative z-10 max-w-6xl mx-auto px-6 py-24 border-t border-white/[0.04] scroll-mt-20">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <div className="text-[10px] text-cyan-400 tracking-[0.3em] uppercase mb-3 font-mono">developer first</div>
+            <div className="text-[10px] text-cyan-400 tracking-[0.2em] mb-3 font-mono">开发者优先</div>
             <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-4">3 行代码，即刻接入</h2>
-            <p className="text-zinc-500 text-sm mb-6">支持 Python、Node.js、Go、Java、Rust 等多种语言 SDK。5 分钟完成集成，1 秒切换任意模型。</p>
+            <p className="text-zinc-500 text-sm mb-6">支持 Python、Node.js、Go、Java、Rust 等多种语言开发包。5 分钟完成集成，1 秒切换任意模型。</p>
             <div className="flex flex-wrap gap-3">
               {["Python", "Node.js", "Go", "Java", "Rust"].map((lang) => (
                 <span key={lang} className="px-3 py-1 rounded-lg text-[10px] tracking-wider uppercase border border-white/[0.08] text-zinc-500 hover:border-cyan-500/30 hover:text-cyan-400 transition-all cursor-pointer">{lang}</span>
@@ -721,7 +721,7 @@ export default function Home() {
                 client = yunshang.<span className="text-cyan-400">Client</span>(<span className="text-emerald-400">&quot;your-api-key&quot;</span>){"\n"}
                 response = client.chat.<span className="text-cyan-400">create</span>({"\n"}
                 {"    "}model=<span className="text-emerald-400">&quot;gpt-5.6-sol&quot;</span>,{"\n"}
-                {"    "}messages=[{`{`}&quot;role&quot;: <span className="text-emerald-400">&quot;user&quot;</span>, &quot;content&quot;: <span className="text-emerald-400">&quot;Hello&quot;</span>{`}`}]{"\n"}
+                {"    "}messages=[{`{`}&quot;role&quot;: <span className="text-emerald-400">&quot;user&quot;</span>, &quot;content&quot;: <span className="text-emerald-400">&quot;你好&quot;</span>{`}`}]{"\n"}
                 ){"\n"}
                 {"\n"}
                 <span className="text-zinc-600"># 请求经云上逐梦网关转发到 OpenAI</span>{"\n"}
@@ -735,7 +735,7 @@ export default function Home() {
       {/* ═══ LOGO MARQUEE ═══ */}
       <section className="relative z-10 py-16 border-t border-white/[0.04] overflow-hidden">
         <div className="text-center mb-8">
-          <p className="text-[10px] text-zinc-600 tracking-[0.3em] uppercase">trusted by 500+ companies worldwide</p>
+          <p className="text-[10px] text-zinc-600 tracking-[0.2em]">全球 500+ 企业信赖</p>
         </div>
         <div className="relative flex overflow-hidden">
           <div className="flex gap-16 animate-marquee whitespace-nowrap">
@@ -749,7 +749,7 @@ export default function Home() {
       {/* ═══ PRICING ═══ */}
       <section id="pricing" className="relative z-10 max-w-6xl mx-auto px-6 py-24 border-t border-white/[0.04] scroll-mt-20">
         <div className="text-center mb-12">
-          <div className="text-[10px] text-cyan-400 tracking-[0.3em] uppercase mb-3 font-mono">pricing</div>
+          <div className="text-[10px] text-cyan-400 tracking-[0.2em] mb-3 font-mono">定价方案</div>
           <h2 className="text-2xl md:text-4xl font-bold tracking-tight mb-4">简单透明的定价</h2>
           <p className="text-zinc-500 text-sm">按实际调用量计费，无最低消费，随时可升级</p>
         </div>
@@ -794,7 +794,7 @@ export default function Home() {
       {/* ═══ FAQ ═══ */}
       <section id="faq" className="relative z-10 max-w-4xl mx-auto px-6 py-24 border-t border-white/[0.04] scroll-mt-20">
         <div className="text-center mb-12">
-          <div className="text-[10px] text-cyan-400 tracking-[0.3em] uppercase mb-3 font-mono">faq</div>
+          <div className="text-[10px] text-cyan-400 tracking-[0.2em] mb-3 font-mono">常见问题</div>
           <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-3">常见问题</h2>
           <p className="text-zinc-500 text-sm">接入、安全、计费、故障——先看这里，少走一圈工单</p>
         </div>
@@ -879,10 +879,10 @@ export default function Home() {
             >
               ×
             </button>
-            <div className="text-[10px] text-cyan-400 tracking-[0.3em] uppercase mb-3 font-mono">live demo</div>
+            <div className="text-[10px] text-cyan-400 tracking-[0.2em] mb-3 font-mono">在线演示</div>
             <h3 className="text-xl font-bold mb-2">30 秒看懂云上逐梦</h3>
             <p className="text-zinc-500 text-sm mb-6 leading-relaxed">
-              同一套 API 和团队 Key 调用 GPT-5.6 Sol。OpenAI 上游密钥只保存在服务器，不会下发到成员浏览器。
+              同一套接口和团队密钥调用 GPT-5.6 Sol。OpenAI 上游密钥只保存在服务器，不会下发到成员浏览器。
             </p>
             <div className="bg-black/50 rounded-xl border border-white/[0.06] p-4 font-mono text-xs text-zinc-400 mb-4 leading-relaxed">
               <div className="text-zinc-600 mb-2"># 固定使用 Sol</div>

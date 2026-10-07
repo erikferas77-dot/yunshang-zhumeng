@@ -23,15 +23,24 @@ fi
 printf 'yszmai.com\n' > "$OUT/CNAME"
 touch "$OUT/.nojekyll"
 
-# /playground（无尾斜杠）→ /playground/
-cat > "$OUT/playground" <<'EOF'
-<!DOCTYPE html><html><head>
+# /playground（无尾斜杠）→ /playground/（不能与 playground/ 目录同名，用根目录 playground.html）
+PLAYGROUND_REDIRECT='<!DOCTYPE html><html><head>
 <meta charset="utf-8">
 <meta http-equiv="refresh" content="0;url=/playground/">
 <link rel="canonical" href="/playground/">
 <script>location.replace("/playground/")</script>
-</head><body></body></html>
-EOF
+</head><body></body></html>'
+
+if [[ -d "$OUT/playground" ]] && [[ ! -f "$OUT/playground.html" ]]; then
+  printf '%s\n' "$PLAYGROUND_REDIRECT" > "$OUT/playground.html"
+elif [[ ! -d "$OUT/playground" ]] && [[ ! -f "$OUT/playground.html" ]]; then
+  printf '%s\n' "$PLAYGROUND_REDIRECT" > "$OUT/playground"
+fi
 
 echo "静态站已打包到 $OUT"
-echo "  - /playground/ -> playground/index.html"
+if [[ -f "$OUT/playground/index.html" ]]; then
+  echo "  - /playground/ -> playground/index.html"
+fi
+if [[ -f "$OUT/playground.html" ]]; then
+  echo "  - /playground -> playground.html (redirect)"
+fi
